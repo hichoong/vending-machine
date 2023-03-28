@@ -17,6 +17,9 @@ spring:
     properties:
       format_sql: true
     show-sql: true
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
 
 mybatis:
   configuration:
@@ -27,6 +30,8 @@ mybatis:
     default-fetch-size: 500
   mapper-locations:
     - classpath:mybatis/mapper/*.xml
+      
+
 
 
 
