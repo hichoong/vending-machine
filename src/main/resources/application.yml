@@ -7,29 +7,18 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/testdb?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=UTF-8&characterSetResults=UTF-8&useSSL=true
+    url: jdbc:mysql://localhost:3306/testdb
     username: testdbuser
     password: 1234
 
-  jpa:
-    hibernate:
-      ddl-auto: create
-    properties:
-      format_sql: true
-    show-sql: true
-  thymeleaf:
-    prefix: classpath:/templates/
-    suffix: .html
-
 mybatis:
+  mapper-locations: mapper/*.xml
   configuration:
-    multiple-result-sets-enabled: false
     map-underscore-to-camel-case: true
-    call-setters-on-nulls: true
-    jdbc-type-for-null: varchar
-    default-fetch-size: 500
-  mapper-locations:
-    - classpath:mybatis/mapper/*.xml
+
+
+
+
       
 
 
