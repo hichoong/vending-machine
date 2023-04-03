@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>자판기 메인</title>
+    <link th:href="@{/css/vending-machine.css}" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-latest.min.js">
+</head>
+<body>
+    <h1>충희네 자판기</h1>
+    <h2>후우</h2>
+    <p>
+        This is text on which we want to apply <strong>very special</strong> styling.
+    </p>
+    <p th:text="${hello}">message</p>
+    <table>
+        <tr>
+            <th>id</th>
+            <th>이름</th>
+            <th>가격</th>
+            <th>수량</th>
+        </tr>
+        <tr th:each="goods : ${goodsList}">
+            <td th:text="${goods.id}">id</td>
+            <td th:text="${goods.name}">이름</td>
+            <td th:text="${goods.price}">가격</td>
+            <td th:text="${goods.count}">수량</td>
+        </tr>
+    </table>
+
+    <form action="" method="post"></form>
+
+
+
+</body>
+</html>

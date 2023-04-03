@@ -12,8 +12,11 @@ import java.util.List;
 public class GoodsService {
     private final GoodsMapper goodsMapper;
 
-    public List<GoodsVo> getGoodsList() {
-        return goodsMapper.getGoodsList();
+    public List<GoodsVo> findAllGoods() {
+        return goodsMapper.findAllGoods();
     }
 
+    public void modifyGoods(Long id) {
+        goodsMapper.modifyGoods(id);
+    }
 }

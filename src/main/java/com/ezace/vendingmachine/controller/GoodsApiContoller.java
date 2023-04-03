@@ -18,13 +18,14 @@ public class GoodsApiContoller {
     private final GoodsService goodsService;
     private final SalesService salesService;
 
-    @GetMapping("/list")
-    public List<GoodsVo> getGoodsList() {
-        return goodsService.getGoodsList();
+    @GetMapping("/")
+    public List<GoodsVo> findAllGoods() {
+        return goodsService.findAllGoods();
     }
 
-    /*@PutMapping("/purchase")
-    public GoodsVo buyGoods(@RequestBody BuyGoods goods) {
+    @PatchMapping("/{id}")
+    public void purchase(@PathVariable Long id){
+        goodsService.modifyGoods(id);
 
-    }*/
+    }
 }

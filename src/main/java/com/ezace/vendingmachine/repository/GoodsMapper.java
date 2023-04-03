@@ -7,7 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface GoodsMapper {
-    List<GoodsVo> getGoodsList();
+    List<GoodsVo> findAllGoods();
 
-    GoodsVo findGoods(Long id);
+    GoodsVo modifyGoods(Long id);
 }
