@@ -1,6 +1,5 @@
 package com.ezace.vendingmachine.controller;
 
-import com.ezace.vendingmachine.domain.dto.BuyGoods;
 import com.ezace.vendingmachine.domain.vo.GoodsVo;
 import com.ezace.vendingmachine.service.GoodsService;
 import com.ezace.vendingmachine.service.SalesService;

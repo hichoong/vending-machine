@@ -1,4 +1,4 @@
-package com.ezace.vendingmachine.domain.dto;
+package com.ezace.vendingmachine.domain.dto.request;
 
 import lombok.Getter;
 import lombok.Setter;

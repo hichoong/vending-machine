@@ -2,8 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ezace.vendingmachine.repository.SalesMapper">
-    <select id="findAllSales" resultType="com.ezace.vendingmachine.domain.vo.SalesVo">
-        SELECT * FROM sales;
+    <select id="findAllSales" resultType="com.ezace.vendingmachine.domain.dto.response.SalesResponse">
+        select
+        s.id, g.name, g.count, s.sales_date
+        from sales s
+        inner join goods g ON s.goods_id = g.id
+        order by s.sales_date  desc ;
     </select>
 
     <insert id="insertSales">

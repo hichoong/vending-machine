@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>관리자페이지</title>
+    <link th:href="@{bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+    <script th:href="@{bootstrap/js/bootstrap.min.js}"></script>
+    <script th:href="@{js/jquery-3.6.4.min.js}"></script>
+</head>
+<body>
+<nav class="navbar navbar-dark bg-dark">
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link" href="#">일별 판매현황</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">월별 판매현황</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">품목별 판매현황</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " href="#">누적 판매현황</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " href="#">재고 관리</a>
+        </li>
+    </ul>
+</nav>
+
+<h1 style="margin-top : 50px;">
+    판매량
+</h1>
+
+
+<table class="table" style="margin-top : 30px;">
+    <thead class="table-dark">
+    <tr>
+        <th scope="col">id</th>
+        <th scope="col">상품</th>
+        <th scope="col">재고</th>
+        <th scope="col">판매일자</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="sales : ${salesList}">
+        <td th:text="${sales.id}">2</td>
+        <td th:text="${sales.name}">Jacob</td>
+        <td th:text="${sales.count}">Jacob</td>
+        <td th:text="${sales.salesDate}">Thornton</td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
