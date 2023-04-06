@@ -60,7 +60,8 @@
                                     <!-- Product name-->
                                     <h5 class="fw-bolder" th:text="${goods.name}" th:value="${goods.name}">이름</h5>
                                     <!-- Product price-->
-                                    <span th:text="|가격 :  ${goods.price}|" th:value="${goods.price}" id="price">가격</span>
+                                    <span th:text="|가격 :  ${goods.price}|" class="text-danger" th:value="${goods.price}" id="price">가격</span>
+                                    <br>
                                     <span th:text="|수량 :  ${goods.count}|" th:value="${goods.count}" id="count">수량</span>
                                 </div>
                             </div>

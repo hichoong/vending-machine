@@ -3,13 +3,16 @@ package com.ezace.vendingmachine.repository;
 import com.ezace.vendingmachine.domain.vo.GoodsVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Repository
 @Mapper
+@Repository
 public interface GoodsMapper {
     List<GoodsVo> findAllGoods();
 
     GoodsVo modifyGoods(Long id);
+
+    void insertGoods(GoodsVo goodsVo);
 }

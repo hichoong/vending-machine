@@ -5,11 +5,12 @@ import com.ezace.vendingmachine.domain.vo.SalesVo;
 import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Repository
 @Mapper
+@Repository
 public interface SalesMapper {
 
     List<SalesResponse> findAllSales();

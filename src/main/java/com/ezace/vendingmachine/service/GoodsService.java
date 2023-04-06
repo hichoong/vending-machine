@@ -19,4 +19,8 @@ public class GoodsService {
     public void modifyGoods(Long id) {
         goodsMapper.modifyGoods(id);
     }
+
+    public void insertGoods(GoodsVo goodsVo) {
+        goodsMapper.insertGoods(goodsVo);
+    }
 }

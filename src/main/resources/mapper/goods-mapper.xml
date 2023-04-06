@@ -13,5 +13,11 @@
         where id = #{id}
     </update>
 
+    <insert id="insertGoods" parameterType="com.ezace.vendingmachine.domain.vo.GoodsVo">
+        insert into goods
+        values (
+            #{id},#{name},#{price},#{count},#{image}
+        )
+    </insert>
 
 </mapper>

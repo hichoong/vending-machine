@@ -1,4 +1,8 @@
 spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
   servlet:
     multipart:
       max-file-size: 10MB
@@ -19,6 +23,7 @@ mybatis:
 pagehelper:
   helper-dialect: mysql
   reasonable: true
+
 
 
 
