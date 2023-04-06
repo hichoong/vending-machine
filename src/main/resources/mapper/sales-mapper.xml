@@ -4,10 +4,10 @@
 <mapper namespace="com.ezace.vendingmachine.repository.SalesMapper">
     <select id="findAllSales" resultType="com.ezace.vendingmachine.domain.dto.response.SalesResponse">
         select
-        s.id, g.name, g.count, s.sales_date
+        s.id, g.name, s.count, g.price, s.sales_date
         from sales s
         inner join goods g ON s.goods_id = g.id
-        order by s.sales_date  desc ;
+        order by s.id  desc
     </select>
 
     <insert id="insertSales">
@@ -20,4 +20,12 @@
             sysdate
         )
     </insert>
+
+    <select id="findAllByPagingSales" resultType="com.ezace.vendingmachine.domain.dto.response.SalesResponse">
+        select
+        s.id, g.name, s.count, g.price, s.sales_date
+        from sales s
+        inner join goods g ON s.goods_id = g.id
+        order by s.sales_date  desc
+    </select>
 </mapper>

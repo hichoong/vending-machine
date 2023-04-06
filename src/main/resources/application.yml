@@ -16,11 +16,9 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
 
-
-
-
-      
-
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
 
 
 

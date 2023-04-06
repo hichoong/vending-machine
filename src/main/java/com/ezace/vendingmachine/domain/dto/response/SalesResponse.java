@@ -9,5 +9,6 @@ public class SalesResponse {
     private Long id;
     private String name;
     private int count;
+    private int price;
     private Timestamp salesDate;
 }

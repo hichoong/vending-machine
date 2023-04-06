@@ -12,7 +12,8 @@
 
 <div class="login-box">
     <h2>Login</h2>
-    <form th:action="@{/login}" method="post" th:object="${loginRequest}" id="loginForm">
+    <h3 th:text="${error}" style="color : red;"></h3>
+    <form th:action="@{/login-admin}" method="post" th:object="${loginRequest}" id="loginForm">
       <div class="user-box" >
         <input type="text" name="name"  th:filed="*{name}" id="name">
         <label>아이디</label>
@@ -21,7 +22,7 @@
         <input type="password" name="password" th:filed="*{password}" id="password">
         <label>비밀번호</label>
       </div>
-      <input type="submit" value="login">
+      <input type="button" value="login" onclick="sendForm()">
         <span></span>
         <span></span>
         <span></span>
@@ -36,7 +37,7 @@
     const password = document.getElementById('password').value;
     console.log(id, password)
     if(document.getElementById("name").value==''){
-	    alert("성명을 입력해주십시오.");
+	    alert("아이디를 입력해주십시오.");
 	    return false;
     }
     if(document.getElementById("password").value==''){

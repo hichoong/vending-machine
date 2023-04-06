@@ -17,7 +17,7 @@ public class AdminService {
         return adminMapper.findAll();
     }
 
-    public AdminVo Login(LoginRequest loginRequest) {
+    public AdminVo login(LoginRequest loginRequest) {
         return adminMapper.findByNameAndPassword(loginRequest);
     }
 }

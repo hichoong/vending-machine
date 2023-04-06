@@ -26,41 +26,50 @@
             <a class="nav-link " href="#">재고 관리</a>
         </li>
     </ul>
+
+    
 </nav>
 
-<h1 style="margin-top : 50px;">
-    판매량
-</h1>
+<h1 style="margin-top : 50px;">판매량</h1>
 
-
+<a th:href="@{/excel/download}">다운로드</a>
 <table class="table" style="margin-top : 30px;">
     <thead class="table-dark">
     <tr>
         <th scope="col">id</th>
         <th scope="col">상품</th>
-        <th scope="col">재고</th>
-        <th scope="col">판매일자</th>
+        <th scope="col">판매 수</th>
+        <th scope="col">판매 가격</th>
+        <th scope="col">판매 일자</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="sales : ${salesList}">
-        <td th:text="${sales.id}">2</td>
-        <td th:text="${sales.name}">Jacob</td>
-        <td th:text="${sales.count}">Jacob</td>
-        <td th:text="${sales.salesDate}">Thornton</td>
+    <tr th:each="sales : ${salesList.getList()}">
+        <td th:text="${sales.getId()}">Jacob</td>
+        <td th:text="${sales.getName()}">Jacob</td>
+        <td th:text="${sales.getCount()}">Jacob</td>
+        <td th:text="${sales.getPrice()}">Jacob</td>
+        <td th:text="${sales.getSalesDate()}">Thornton</td>
     </tr>
     </tbody>
 </table>
 
 <nav aria-label="Page navigation example" >
     <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        <li class="page-item" th:classappend="${salesList.getPrePage() == 0} ? 'disabled'">
+            <!-- href: /page?pageNum=이전페이지&keyword=검색분류&search=검색어 -->
+            <a th:href="@{/sales(pageNum=${salesList.getPrePage()})}" class="page-link">Previous</a>
+        </li>
+        <li class="page-item" th:each="page: ${#numbers.sequence(salesList.getNavigateFirstPage(), salesList.getNavigateLastPage())}" th:classappend="${page == salesList.getPageNum()} ? 'active'">
+            <a th:text="${page}" th:href="@{/sales(pageNum=${page})}" class="page-link"></a>
+        </li>
+        <li class="page-item" th:classappend="${salesList.getNextPage() == 0} ? 'disabled'">
+            <!-- href: /page?pageNum=다음페이지&keyword=검색분류&search=검색어 -->
+            <a th:href="@{/sales(pageNum=${salesList.getNextPage()})}" class="page-link">Next</a>
+        </li>
     </ul>
 </nav>
+
 
 </body>
 </html>
