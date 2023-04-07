@@ -3,21 +3,38 @@
 
 <mapper namespace="com.ezace.vendingmachine.repository.GoodsMapper">
     <select id="findAllGoods" resultType="com.ezace.vendingmachine.domain.vo.GoodsVo">
-        select * from goods
+        <![CDATA[
+            select * from goods
+        ]]>
     </select>
     
-    <update id="modifyGoods" parameterType="int">
-        update goods
+    <update id="modifyGoods">
+        <![CDATA[
+            update goods
             set
-        count = count - 1
-        where id = #{id}
+            count = count - 1
+            where id = #{id}
+        ]]>
+
     </update>
 
     <insert id="insertGoods" parameterType="com.ezace.vendingmachine.domain.vo.GoodsVo">
-        insert into goods
-        values (
-            #{id},#{name},#{price},#{count},#{image}
-        )
+        <![CDATA[
+            insert into goods
+            values (
+                #{id},#{name},#{price},#{count},#{image}
+            )
+        ]]>
     </insert>
 
+    <select id="findById" resultType="com.ezace.vendingmachine.domain.vo.GoodsVo" >
+        <![CDATA[
+            select * from goods
+            where name = #[name]
+         ]]>
+    </select>
+
+    <delete id="deleteGoods">
+        truncate goods
+    </delete>
 </mapper>

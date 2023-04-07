@@ -20,7 +20,7 @@ public class SalesController {
 
     private final SalesService salesService;
     @GetMapping("/sales")
-    public String admin(Model model, @RequestParam(required = false, defaultValue = "1") int pageNum) {
+    public String salesList(Model model, @RequestParam(required = false, defaultValue = "1") int pageNum) {
         log.info("admin페이지 호출");
         PageInfo<SalesResponse> salesList = new PageInfo<>(salesService.findAllByPagingSales(pageNum), 10);
         /*List<SalesVo> allSales = salesService.findAllSales();*/

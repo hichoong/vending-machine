@@ -23,4 +23,13 @@ public class GoodsService {
     public void insertGoods(GoodsVo goodsVo) {
         goodsMapper.insertGoods(goodsVo);
     }
+
+    public GoodsVo findById(Long id) {
+       return goodsMapper.findById(id);
+    }
+
+    public void deleteGoods(){
+        goodsMapper.deleteGoods();
+    }
+
 }

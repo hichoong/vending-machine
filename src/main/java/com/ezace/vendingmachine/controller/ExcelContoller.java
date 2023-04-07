@@ -77,6 +77,9 @@ public class ExcelContoller {
             workbook = new HSSFWorkbook(file.getInputStream());
         }
         Sheet worksheet = workbook.getSheetAt(0);
+        //DB 데이터 품목 삭제
+        goodsService.deleteGoods();
+        //DB에 새로 넣을 데이터 구성
         for (int i = 1; i < worksheet.getPhysicalNumberOfRows(); i++) { // 4
             Row row = worksheet.getRow(i);
             /*ExcelData data = new ExcelData();

@@ -17,14 +17,16 @@ public class GoodsContoller {
     private final GoodsService goodsService;
     private final SalesService salesService;
 
-    @GetMapping("/")
+    @GetMapping("/goods")
     public List<GoodsVo> findAllGoods() {
         return goodsService.findAllGoods();
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/goods/{id}")
     public void purchase(@PathVariable Long id){
-        goodsService.modifyGoods(id);
-
+        GoodsVo goodsVo = goodsService.findById(id);
+        if (goodsVo != null) {
+            goodsService.modifyGoods(id);
+        }
     }
 }

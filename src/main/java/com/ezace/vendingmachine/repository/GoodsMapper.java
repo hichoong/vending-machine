@@ -15,4 +15,8 @@ public interface GoodsMapper {
     GoodsVo modifyGoods(Long id);
 
     void insertGoods(GoodsVo goodsVo);
+
+    GoodsVo findById(Long id);
+
+    void deleteGoods();
 }
