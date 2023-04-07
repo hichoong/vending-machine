@@ -1,4 +1,3 @@
-/*<![CDATA[*/
 function addMoney(type)  {
     // 결과를 표시할 element
     const resultElement = document.getElementById('money');
@@ -28,4 +27,3 @@ function purchase(type){
     let number = resultElement.innerText;
     console.log("price = " + type);
 }
-/*]]>*/

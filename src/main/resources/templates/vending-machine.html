@@ -66,11 +66,13 @@
                                 </div>
                             </div>
                             <!-- Product actions-->
+                            <form action="th:" method="post">
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                 <div class="text-center">
                                     <a class="btn btn-outline-dark mt-auto" th:onclick="purchase()">구입</a>
                                 </div>
                             </div>
+                            </form>
                         </div>
                     </div>
                     </th:block>
@@ -83,5 +85,12 @@
         </footer>
         <!-- Core theme JS-->
         <script type="text/javascript" th:src="@{/js/scripts.js}"></script>
+        <script th:inline="javascript">
+            $(document).ready(function(){
+                [# th:each="goods : ${goodsList}"]
+                alert([[${goods.name}]]);
+                [/]
+            });
+        </script>
     </body>
 </html>
