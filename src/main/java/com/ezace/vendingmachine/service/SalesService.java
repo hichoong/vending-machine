@@ -1,5 +1,6 @@
 package com.ezace.vendingmachine.service;
 
+import com.ezace.vendingmachine.domain.dto.request.SelectDate;
 import com.ezace.vendingmachine.domain.dto.response.SalesResponse;
 import com.ezace.vendingmachine.domain.vo.SalesVo;
 import com.ezace.vendingmachine.repository.SalesMapper;
@@ -22,9 +23,8 @@ public class SalesService {
         PageHelper.startPage(pageNum, 10);
         return salesMapper.findAllByPagingSales();
     }
-
-
-
-
-
+    public List<SalesResponse> findBySalesDate(SelectDate selectDate) {
+        List<SalesResponse> result = salesMapper.findBySalesDate(selectDate);
+        return result;
+    }
 }

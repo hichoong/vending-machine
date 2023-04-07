@@ -1,5 +1,6 @@
 package com.ezace.vendingmachine.repository;
 
+import com.ezace.vendingmachine.domain.dto.request.SelectDate;
 import com.ezace.vendingmachine.domain.dto.response.SalesResponse;
 import com.ezace.vendingmachine.domain.vo.SalesVo;
 import com.github.pagehelper.Page;
@@ -7,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Mapper
@@ -18,4 +20,6 @@ public interface SalesMapper {
     void insertSales(Long id);
 
     Page<SalesResponse> findAllByPagingSales();
+
+    List<SalesResponse> findBySalesDate(SelectDate selectDate);
 }

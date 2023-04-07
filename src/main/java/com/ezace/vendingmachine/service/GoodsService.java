@@ -29,7 +29,6 @@ public class GoodsService {
     }
 
     public void deleteGoods(){
-        goodsMapper.deleteGoods();
+        /*goodsMapper.deleteGoods();*/
     }
-
 }
