@@ -1,11 +1,11 @@
 package com.ezace.vendingmachine.domain.dto.request;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
+@Data
 public class BuyGoods {
-    private String name;
-    private int count;
+    private Long id;
+    private int money;
 }

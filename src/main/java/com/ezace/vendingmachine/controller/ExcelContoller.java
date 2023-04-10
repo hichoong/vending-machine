@@ -78,15 +78,10 @@ public class ExcelContoller {
         }
         Sheet worksheet = workbook.getSheetAt(0);
         //DB 데이터 품목 삭제
-        goodsService.deleteGoods();
+        /*goodsService.deleteGoods();*/
         //DB에 새로 넣을 데이터 구성
         for (int i = 1; i < worksheet.getPhysicalNumberOfRows(); i++) { // 4
             Row row = worksheet.getRow(i);
-            /*ExcelData data = new ExcelData();
-            data.setId((long) row.getCell(0).getNumericCellValue());
-            data.setName(row.getCell(1).getStringCellValue());
-            data.setEmail(row.getCell(2).getStringCellValue());
-            dataList.add(data);*/
             GoodsVo goodsVo = new GoodsVo();
             goodsVo.setId((long)row.getCell(0).getNumericCellValue());
             goodsVo.setName(row.getCell(1).getStringCellValue());

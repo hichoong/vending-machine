@@ -27,10 +27,10 @@
         ]]>
     </insert>
 
-    <select id="findById" resultType="com.ezace.vendingmachine.domain.vo.GoodsVo" >
+    <select id="findById" parameterType="long" resultType="com.ezace.vendingmachine.domain.vo.GoodsVo" >
         <![CDATA[
-            select * from goods
-            where name = #[name]
+           select * from goods
+            where id = #{id}
          ]]>
     </select>
 

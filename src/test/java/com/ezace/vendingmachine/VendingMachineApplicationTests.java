@@ -8,6 +8,7 @@ class VendingMachineApplicationTests {
 
 	@Test
 	void contextLoads() {
+
 	}
 
 }

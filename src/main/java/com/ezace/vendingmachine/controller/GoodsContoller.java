@@ -1,5 +1,7 @@
 package com.ezace.vendingmachine.controller;
 
+import com.ezace.vendingmachine.domain.dto.request.BuyGoods;
+import com.ezace.vendingmachine.domain.dto.response.GoodsResponse;
 import com.ezace.vendingmachine.domain.vo.GoodsVo;
 import com.ezace.vendingmachine.service.GoodsService;
 import com.ezace.vendingmachine.service.SalesService;
@@ -28,5 +30,12 @@ public class GoodsContoller {
         if (goodsVo != null) {
             goodsService.modifyGoods(id);
         }
+    }
+
+    @PostMapping("/goods/purchase")
+    public @ResponseBody GoodsResponse purchase(@RequestBody BuyGoods buyGoods) {
+        log.info("받은 정보 값 = {}, {}",buyGoods.getId(), buyGoods.getMoney() );
+        GoodsResponse goodsResponse = goodsService.purchase(buyGoods);
+        return goodsResponse;
     }
 }

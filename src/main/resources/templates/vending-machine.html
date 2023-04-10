@@ -50,31 +50,34 @@
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-3 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                     <th:block th:each="goods : ${goodsList}">
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" th:src="@{images/} + ${goods.image} + .png" alt="..." style="width:200px; height:300px; margin-left: 40px;"  />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder" th:text="${goods.name}" th:value="${goods.name}">이름</h5>
-                                    <!-- Product price-->
-                                    <span th:text="|가격 :  ${goods.price}|" class="text-danger" th:value="${goods.price}" id="price">가격</span>
-                                    <br>
-                                    <span th:text="|수량 :  ${goods.count}|" th:value="${goods.count}" id="count">수량</span>
+                        <form action="th:" method="POST">
+                            <div class="col mb-5">
+                            <div class="card h-100">
+                                <!-- Product image-->
+                                <img class="card-img-top" th:src="@{images/} + ${goods.image} + .png" alt="..." style="width:200px; height:300px; margin-left: 40px;"  />
+                                <!-- Product details-->
+                                <div class="card-body p-4">
+                                    <div class="text-center" id="${goods.id}">
+                                        <!-- Product name-->
+                                        <input type="hidden" th:id="${goods.id}" th:value="${goods.price}" />
+                                        <!-- Product name-->
+                                        <h5 class="fw-bolder" th:text="${goods.name}" th:value="${goods.name}" id="name">이름</h5>
+                                        <!-- Product price-->
+                                        <span th:text="|가격 :  ${goods.price}|" class="text-danger" th:value="${goods.price}" th:id="|price${goods.id}|">가격</span>
+                                        <br>
+                                        <span th:text="|수량 :  ${goods.count}|" th:value="${goods.count}" th:id="|count${goods.id}|">수량</span>
+                                    </div>
+                                </div>
+                                <!-- Product actions-->
+
+                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                    <div class="text-center">
+                                        <a class="btn btn-outline-dark mt-auto" th:href="|javascript:purchase(${goods.id})|" id="purchase">구입</a>
+                                    </div>
                                 </div>
                             </div>
-                            <!-- Product actions-->
-                            <form action="th:" method="post">
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center">
-                                    <a class="btn btn-outline-dark mt-auto" th:onclick="purchase()">구입</a>
-                                </div>
-                            </div>
-                            </form>
                         </div>
-                    </div>
+                    </form>
                     </th:block>
                 </div>
             </div>
@@ -86,13 +89,61 @@
         <!-- Core theme JS-->
         <script type="text/javascript" th:src="@{/js/scripts.js}"></script>
         <script th:inline="javascript">
-            $(document).ready(function(){
-                [# th:each="goods : ${goodsList}"]
-                alert([[${goods.name}]]);
+
+        function addMoney(type)  {
+            // 결과를 표시할 element
+            const resultElement = document.getElementById('money');
+
+            // 현재 화면에 표시된 값
+            let number = resultElement.innerText;
+
+            // 더하기/빼기
+            if(type == '100') {
+                number = parseInt(number) + 100;
+            }else if(type == '500')  {
+                number = parseInt(number) + 500;
+            }else if(type == '1000') {
+                number = parseInt(number) + 1000;
+            }else if(type == '0') {
+                number = 0;
+            }
+            // 결과 출력
+            resultElement.innerText = number;
+        }
 
 
-                [/]
+         function purchase(type) {
+            
+            
+            const resultElement = document.getElementById('money');
+            const moneyString = resultElement.innerText;
+            const id = type;
+            console.log(id);
+            const money = parseInt(moneyString);
+            const input= {
+                    "id": type,
+                    "money": money
+            };
+            console.log(input);
+            const count = 'count'+id;
+            $.ajax({
+                url: '/goods/purchase',
+                type:"POST",
+                contentType : "application/json",
+                data:JSON.stringify(input),
+                dataType : "json",
+                success:function(data) {
+                    alert("통신성공");
+                    alert(data.msg);
+                     resultElement.innerText = data.money;
+                    $('#'+count).replaceWith("수량 : " + data.count);
+                    location.reload;
+                },
+                error : function(e) {
+                   alert("통신실패");
+                }
             });
+         }
         </script>
     </body>
 </html>

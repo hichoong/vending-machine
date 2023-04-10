@@ -12,12 +12,10 @@
 
     <insert id="insertSales">
         insert into sales (
-            goods_id,
-            sales_date
+            goods_id
         )
         values (
-            #{goodsId},
-            sysdate
+            #{goodsId}
         )
     </insert>
 

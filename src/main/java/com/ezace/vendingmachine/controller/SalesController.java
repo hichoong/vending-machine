@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
@@ -26,9 +27,11 @@ public class SalesController {
         log.info("sales페이지 호출");
         PageInfo<SalesResponse> salesList = new PageInfo<>(salesService.findAllByPagingSales(pageNum), 10);
         model.addAttribute("salesList", salesList);
-        return "admin";
+        List<SalesResponse> allSales = salesService.findAllSales();
+        int total = allSales.stream().mapToInt(SalesResponse::getPrice).sum();
+        model.addAttribute("total", total);
+        return "sales";
     }
-
     @GetMapping("/sales/list")
     public @ResponseBody List<SalesResponse> salesList () {
         return salesService.findAllSales();
@@ -39,6 +42,6 @@ public class SalesController {
         log.info("선택한 날짜 : {}", selectDate);
         List<SalesResponse> salesList = salesService.findBySalesDate(selectDate);
         model.addAttribute("salesList", salesList);
-        return "admin";
+        return "sales";
     }
 }

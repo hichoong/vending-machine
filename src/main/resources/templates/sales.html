@@ -30,13 +30,13 @@
     
 </nav>
 
-<h1 style="margin-top : 50px;">판매량</h1>
+<h1 style="margin-top : 50px;" th:text="|전체 판매량 : ${#numbers.formatInteger(total, 3, 'COMMA')}원|">판매량</h1>
 
 <a th:href="@{/excel/download}">다운로드</a>
 <table class="table" style="margin-top : 30px;">
     <thead class="table-dark">
     <tr>
-        <th scope="col">id</th>
+        <!--<th scope="col">id</th>-->
         <th scope="col">상품</th>
         <th scope="col">판매 수</th>
         <th scope="col">판매 가격</th>
@@ -45,7 +45,7 @@
     </thead>
     <tbody>
     <tr th:each="sales : ${salesList.getList()}">
-        <td th:text="${sales.getId()}">Jacob</td>
+       <!-- <td th:text="${sales.getId()}">Jacob</td>-->
         <td th:text="${sales.getName()}">Jacob</td>
         <td th:text="${sales.getCount()}">Jacob</td>
         <td th:text="${sales.getPrice()}">Jacob</td>

@@ -37,4 +37,10 @@ public class AdminController {
         session.setAttribute("loginUser", loginUser);
         return "redirect:/sales";
     }
+
+    @GetMapping("/sign")
+    public String sign() {
+        log.info("회원가입 페이지 호출");
+        return "sign";
+    }
 }

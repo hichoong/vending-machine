@@ -12,7 +12,7 @@ import java.util.List;
 public interface GoodsMapper {
     List<GoodsVo> findAllGoods();
 
-    GoodsVo modifyGoods(Long id);
+    void modifyGoods(Long id);
 
     void insertGoods(GoodsVo goodsVo);
 
