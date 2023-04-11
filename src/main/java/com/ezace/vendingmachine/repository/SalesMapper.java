@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Mapper
@@ -16,10 +17,10 @@ import java.util.List;
 public interface SalesMapper {
 
     List<SalesResponse> findAllSales();
-
-    void insertSales(Long id);
-
     Page<SalesResponse> findAllByPagingSales();
-
+    void insertSales(Long id);
     List<SalesResponse> findBySalesDate(SelectDate selectDate);
+    Page<SalesResponse> findBSalesDatePaging(SelectDate selectDate);
+
+    Page<SalesResponse> findBySalesDate(LocalDateTime firstChoiceDate);
 }

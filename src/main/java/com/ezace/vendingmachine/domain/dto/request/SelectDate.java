@@ -2,10 +2,10 @@ package com.ezace.vendingmachine.domain.dto.request;
 
 import lombok.Data;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Data
 public class SelectDate {
-    private Timestamp startDate;
-    private Timestamp endDate;
+    private LocalDateTime firstChoiceDate;
+    private LocalDateTime secondChoiceDate;
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,26 +23,35 @@ import java.util.stream.Collectors;
 public class SalesController {
 
     private final SalesService salesService;
+
     @GetMapping("/sales")
     public String salesList(Model model, @RequestParam(required = false, defaultValue = "1") int pageNum) {
         log.info("sales페이지 호출");
-        PageInfo<SalesResponse> salesList = new PageInfo<>(salesService.findAllByPagingSales(pageNum), 10);
+        PageInfo<SalesResponse> salesList = new PageInfo<>(salesService.findAllByPagingSales(pageNum));
         model.addAttribute("salesList", salesList);
         List<SalesResponse> allSales = salesService.findAllSales();
         int total = allSales.stream().mapToInt(SalesResponse::getPrice).sum();
         model.addAttribute("total", total);
         return "sales";
     }
-    @GetMapping("/sales/list")
-    public @ResponseBody List<SalesResponse> salesList () {
-        return salesService.findAllSales();
-    }
 
     @GetMapping("/sales/date")
-    public String selectDate(@RequestBody SelectDate selectDate, Model model) {
-        log.info("선택한 날짜 : {}", selectDate);
-        List<SalesResponse> salesList = salesService.findBySalesDate(selectDate);
+    public String selectDate(@RequestParam(required = false, defaultValue = "now()")LocalDateTime firstChoiceDate, Model model, @RequestParam(required = false, defaultValue = "1")int pageNum) {
+        log.info("선택한 날짜 : {}");
+        PageInfo<SalesResponse> salesList = new PageInfo<>(salesService.findBySalesDate(pageNum, firstChoiceDate), 10);
         model.addAttribute("salesList", salesList);
-        return "sales";
+        return "sales-date";
+    }
+
+    @GetMapping("/sales/month")
+    public String selectMonth() {
+        log.info("선택한 월 = {}");
+        return "sales-month";
+    }
+
+    @GetMapping("/sales/goods")
+    public String salesGoods() {
+        log.info("품목별 판매량");
+        return "sales-goods";
     }
 }

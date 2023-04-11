@@ -9,6 +9,7 @@ import com.github.pagehelper.PageHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -26,5 +27,10 @@ public class SalesService {
     public List<SalesResponse> findBySalesDate(SelectDate selectDate) {
         List<SalesResponse> result = salesMapper.findBySalesDate(selectDate);
         return result;
+    }
+
+    public Page<SalesResponse> findBySalesDate(int pageNum, LocalDateTime firstChoiceDate) {
+        PageHelper.startPage(pageNum, 10);
+        return salesMapper.findBySalesDate(firstChoiceDate);
     }
 }

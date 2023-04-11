@@ -29,6 +29,6 @@
 
     <select id="findBySalesDate" resultType="com.ezace.vendingmachine.domain.dto.response.SalesResponse">
         select *from sales s
-        where date(sales_date) between '2022-11-11' and now()
+        where date(sales_date) = #{firstChoiceDate}
     </select>
 </mapper>

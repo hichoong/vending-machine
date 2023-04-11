@@ -2,7 +2,7 @@ package com.ezace.vendingmachine.domain.dto.response;
 
 import lombok.Data;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Data
 public class SalesResponse {
@@ -10,5 +10,5 @@ public class SalesResponse {
     private String name;
     private int count;
     private int price;
-    private Timestamp salesDate;
+    private LocalDateTime salesDate;
 }

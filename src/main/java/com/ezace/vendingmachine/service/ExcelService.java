@@ -1,11 +1,16 @@
 package com.ezace.vendingmachine.service;
 
 import com.ezace.vendingmachine.domain.dto.response.SalesResponse;
+import com.ezace.vendingmachine.domain.vo.GoodsVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -16,16 +21,14 @@ import java.util.List;
 @Slf4j
 public class ExcelService {
     private final SalesService salesService;
+    private final GoodsService goodsService;
     public void excelDownloadByAllSales(HttpServletResponse response) {
-
         List<SalesResponse> allSales = salesService.findAllSales();
-
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("첫번째 시트");
         Row row = null;
         Cell cell = null;
         int rowNum = 0;
-
         // Header
         row = sheet.createRow(rowNum);
         cell = row.createCell(0);
@@ -38,7 +41,6 @@ public class ExcelService {
         cell.setCellValue("판매가격");
         cell = row.createCell(4);
         cell.setCellValue("판매일자");
-
         // Body
         for (SalesResponse sales : allSales) {
             row = sheet.createRow(++rowNum);
@@ -57,7 +59,6 @@ public class ExcelService {
             cell = row.createCell(4);
             cell.setCellValue(sales.getSalesDate());
             cell.setCellStyle(cellStyle);
-
         }
         // 컨텐츠 타입과 파일명 지정
         response.setContentType("ms-vnd/excel");
@@ -82,5 +83,46 @@ public class ExcelService {
                 throw new RuntimeException(e);
             }
         }
+    }
+    public Model excelUpload(MultipartFile file, Model model) {
+        String extension = FilenameUtils.getExtension(file.getOriginalFilename()); // 3
+        if (!extension.equals("xlsx") && !extension.equals("xls")) {
+            model.addAttribute("error", "액셀 파일만 넣어주세요.");
+            return model;
+        }
+        Workbook workbook = null;
+        try {
+        if (extension.equals("xlsx")) {
+            workbook = new XSSFWorkbook(file.getInputStream());
+        } else if (extension.equals("xls")) {
+            workbook = new HSSFWorkbook(file.getInputStream());
+        }
+        Sheet worksheet = workbook.getSheetAt(0);
+        //DB 데이터 품목 삭제
+        /*goodsService.deleteGoods();*/
+        //DB에 새로 넣을 데이터 구성
+
+            for (int i = 1; i < worksheet.getPhysicalNumberOfRows()-1; i++) {
+                Row row = worksheet.getRow(i);
+                GoodsVo goodsVo = new GoodsVo();
+                goodsVo.setId((long)row.getCell(0).getNumericCellValue());
+                goodsVo.setName(row.getCell(1).getStringCellValue());
+                goodsVo.setPrice((int)row.getCell(2).getNumericCellValue());
+                goodsVo.setCount((int)row.getCell(3).getNumericCellValue());
+                //재고가 30을 넘길 시 30으로 조정
+                if (goodsVo.getCount() > 30) {
+                    goodsVo.setCount(30);
+                }
+                goodsVo.setImage(row.getCell(4).getStringCellValue());
+                goodsService.insertGoods(goodsVo);
+            }
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+         finally {
+            workbookClose(workbook);
+        }
+        model.addAttribute("success", "업로드 성공");
+        return model;
     }
 }

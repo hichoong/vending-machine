@@ -27,7 +27,9 @@ public class AdminService {
     }
 
     public Model login(LoginRequest loginRequest, Model model) {
+        log.info("로그인 서비스 실행");
         AdminVo admin = adminMapper.findByName(loginRequest.getName());
+        log.info("로그인 회원 정보 = {}", admin);
         if (admin == null) {
             model.addAttribute("msg1", "아이디를 확인해 주세요.");
             return model;

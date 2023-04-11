@@ -2,11 +2,11 @@ package com.ezace.vendingmachine.domain.vo;
 
 import lombok.*;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Data
 public class SalesVo {
     private Long id;
     private Long goodsId;
-    private Timestamp salesDate;
+    private LocalDateTime salesDate;
 }

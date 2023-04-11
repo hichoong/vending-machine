@@ -19,6 +19,6 @@
 
     <select id="findByName" resultType="com.ezace.vendingmachine.domain.vo.AdminVo">
         select * from admin
-        where name =#{name}
+        where name = #{name}
     </select>
 </mapper>
