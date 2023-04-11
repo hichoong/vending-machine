@@ -110,22 +110,18 @@
             // 결과 출력
             resultElement.innerText = number;
         }
-
-
          function purchase(type) {
-            
-            
             const resultElement = document.getElementById('money');
-            const moneyString = resultElement.innerText;
-            const id = type;
+            var moneyString = resultElement.innerText;
+            var id = type;
             console.log(id);
-            const money = parseInt(moneyString);
-            const input= {
+            var money = parseInt(moneyString);
+            var input= {
                     "id": type,
                     "money": money
             };
             console.log(input);
-            const count = 'count'+id;
+            var count = 'count'+id;
             $.ajax({
                 url: '/goods/purchase',
                 type:"POST",
@@ -136,7 +132,7 @@
                     alert("통신성공");
                     alert(data.msg);
                      resultElement.innerText = data.money;
-                    $('#'+count).replaceWith("수량 : " + data.count);
+                    $('#'+count).html("수량 : " + data.count);
                     location.reload;
                 },
                 error : function(e) {

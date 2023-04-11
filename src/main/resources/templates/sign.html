@@ -7,32 +7,33 @@
   <script th:href="@{js/jquery-3.6.4.min.js}"></script>
 </head>
 <body>
-<form action="doJoin" method="POST" class="joinForm" onsubmit="DoJoinForm__submit(this); return false;">
+<form th:action="@{/sign}" method="POST" class="joinForm" th:object="${joinForm}" >
 
-  <h2>회원가입</h2>
-  <div class="textForm">
-    <input name="loginId" type="text" class="id" placeholder="아이디"/>
-
-  </div>
-  <div class="textForm">
-    <input name="loginPw" type="password" class="pw" placeholder="비밀번호"/>
-  </div>
-  <div class="textForm">
-    <input name="loginPwConfirm" type="password" class="pw" placeholder="비밀번호 확인"/>
-  </div>
-  <div class="textForm">
-    <input name="name" type="password" class="name" placeholder="이름"/>
-  </div>
-  <div class="textForm">
-    <input name="email" type="text" class="email" placeholder="이메일"/>
-  </div>
-  <div class="textForm">
-    <input name="nickname" type="text" class="nickname" placeholder="닉네임"/>
-  </div>
-  <div class="textForm">
-    <input name="cellphoneNo" type="number" class="cellphoneNo" placeholder="전화번호"/>
-  </div>
-  <input type="submit" class="btn" value="J O I N"/>
+    <h2>회원가입</h2>
+    <div class="textForm">
+        <input name="name" type="text" class="name" placeholder="이름" th:field="*{name}" id="name"/>
+        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error">error msg</p>
+        <p th:if="${msg1 != null}" th:text="${msg1}" class="error">error msg</p>
+    </div>
+    <div class="textForm">
+      <input name="password" type="password" class="pw" placeholder="비밀번호"  th:field="*{password}" id="password"/>
+        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error">error msg</p>
+    </div>
+    <div class="textForm">
+      <input name="password2" type="password" class="pw" placeholder="비밀번호 확인" th:field="*{password2}" id="password2"/>
+        <p th:if="${#fields.hasErrors('password2')}" th:errors="*{password2}" class="error">error msg</p>
+        <p th:if="${msg2 != null}" th:text="${msg2}" class="error">error msg</p>
+    </div>
+    <div class="textForm">
+      <input name="email" type="text" class="email" placeholder="이메일" th:field="*{email}" id="email"/>
+    </div>
+    <div class="textForm">
+      <input name="nickname" type="text" class="nickname" placeholder="닉네임" th:field="*{nickname}" id="nickname"/>
+    </div>
+    <div class="textForm">
+      <input name="phone" type="number" class="cellphoneNo" placeholder="전화번호" th:field="*{phone}" id="phone"/>
+    </div>
+    <input type="submit" class="btn" value="J O I N"/>
 </form>
 </body>
 </html>

@@ -14,4 +14,8 @@ import java.util.List;
 public interface AdminMapper {
     List<AdminVo> findAll();
     AdminVo findByNameAndPassword(LoginRequest loginRequest);
+
+    void insertAdmin(AdminVo adminVo);
+
+    AdminVo findByName(String name);
 }
