@@ -20,7 +20,5 @@ public interface SalesMapper {
     Page<SalesResponse> findAllByPagingSales();
     void insertSales(Long id);
     List<SalesResponse> findBySalesDate(SelectDate selectDate);
-    Page<SalesResponse> findBSalesDatePaging(SelectDate selectDate);
-
-    Page<SalesResponse> findBySalesDate(LocalDateTime firstChoiceDate);
+    Page<SalesResponse> findBySalesDate(String firstChoiceDate);
 }

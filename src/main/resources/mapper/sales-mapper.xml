@@ -28,7 +28,9 @@
     </select>
 
     <select id="findBySalesDate" resultType="com.ezace.vendingmachine.domain.dto.response.SalesResponse">
-        select *from sales s
-        where date(sales_date) = #{firstChoiceDate}
+        select s.id, g.name, s.count, g.price, s.sales_date
+        from sales s
+        inner join goods g ON s.goods_id = g.id
+        where date(s.sales_date) = #{firstChoiceDate}
     </select>
 </mapper>

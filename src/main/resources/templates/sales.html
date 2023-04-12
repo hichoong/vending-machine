@@ -11,6 +11,9 @@
 <nav class="navbar navbar-dark bg-dark">
     <ul class="nav">
         <li class="nav-item">
+            <a class="nav-link" th:href="@{/sales}">전체 판매현황</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" th:href="@{/sales/date}">일별 판매현황</a>
         </li>
         <li class="nav-item">
@@ -42,12 +45,10 @@
     </thead>
     <tbody>
     <tr th:each="sales : ${salesList.getList()}">
-       <!-- <td th:text="${sales.getId()}">Jacob</td>-->
-        <td th:text="${sales.getName()}">Jacob</td>
-        <td th:text="${sales.getCount()}">Jacob</td>
-        <td th:text="${sales.getPrice()}">Jacob</td>
-        <td th:text="${#temporals.format(sales.salesDate, 'yyyy-MM-dd HH:mm:ss')}">Thornton</td>
-
+        <td th:text="${sales.getName()}">상품</td>
+        <td th:text="${sales.getCount()}">판매 수</td>
+        <td th:text="${sales.getPrice()}">판매 가격</td>
+        <td th:text="${#temporals.format(sales.salesDate, 'yyyy-MM-dd HH:mm:ss')}">판매 일자</td>
     </tr>
     </tbody>
 </table>
