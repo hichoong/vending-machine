@@ -49,15 +49,19 @@ public class SalesController {
         return "sales-date";
     }
 
-    @GetMapping("/sales/month")
-    public String selectMonth() {
-        log.info("선택한 월 = {}");
-        return "sales-month";
+    @GetMapping("/sales/statistics")
+    public String selectStatistics() {
+        log.info("통계 페이지");
+        List<SalesResponse> allSales = salesService.findAllSales();
+        return "sales-statistics";
     }
 
     @GetMapping("/sales/goods")
-    public String salesGoods() {
+    public String salesGoods(Model model) {
         log.info("품목별 판매량");
+        List<SalesResponse> salesList = salesService.findByGoods();
+        log.info("품목 = {}", salesList );
+        model.addAttribute("salesList", salesList);
         return "sales-goods";
     }
 

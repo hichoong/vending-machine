@@ -38,4 +38,8 @@ public class SalesService {
     public List<SalesResponse> findBySalesDate(String firstChoiceDate) {
         return salesMapper.findBySalesDate(firstChoiceDate);
     }
+
+    public List<SalesResponse> findByGoods() {
+        return salesMapper.findByGoods();
+    }
 }

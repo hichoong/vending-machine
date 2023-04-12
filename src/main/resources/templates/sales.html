@@ -10,21 +10,23 @@
 <body>
 <nav class="navbar navbar-dark bg-dark">
     <ul class="nav">
-        <li class="nav-item">
-            <a class="nav-link" th:href="@{/sales}">전체 판매현황</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" th:href="@{/sales/date}">일별 판매현황</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" th:href="@{/sales/month}">월별 판매현황</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" th:href="@{/sales/goods}">품목별 판매현황</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link " th:href="@{sales/manage}">재고 관리</a>
-        </li>
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/sales}">전체 판매현황</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/sales/date}">일별 판매현황</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/sales/goods}">품목별 판매현황</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/sales/statistics}">통계</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " th:href="@{sales/manage}">재고 관리</a>
+            </li>
+        </ul>
     </ul>
 
     
@@ -73,7 +75,6 @@
     <input th:type="submit" value="제출" />
 </form>
 <script th:inline="javascript">
-      function
 
     </script>
 </body>

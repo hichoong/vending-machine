@@ -33,4 +33,10 @@
         inner join goods g ON s.goods_id = g.id
         where date(s.sales_date) = #{firstChoiceDate}
     </select>
+
+    <select id="findByGoods" resultType="com.ezace.vendingmachine.domain.dto.response.SalesResponse">
+        select g.name, sum(g.price) as price from sales s
+        inner join goods g ON s.goods_id = g.id
+        group by g.name with rollup
+    </select>
 </mapper>
