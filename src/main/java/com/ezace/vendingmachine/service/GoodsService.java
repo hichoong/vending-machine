@@ -59,7 +59,7 @@ public class GoodsService {
         }
         log.info("상품정보 : {}", goodsVo);
         goodsMapper.modifyGoods(goodsVo.getId());
-        salesMapper.insertSales(goodsVo.getId());
+        salesMapper.insertSales(goodsVo.getName(),goodsVo.getPrice());
         goodsVo = goodsMapper.findById(buyGoods.getId());
         BigDecimal bigDecimalMoney = new BigDecimal(buyGoods.getMoney());
         BigDecimal bigDecimalPrice = new BigDecimal(goodsVo.getPrice());

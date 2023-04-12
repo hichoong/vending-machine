@@ -8,33 +8,37 @@
     <script th:href="@{/js/jquery-3.6.4.min.js}"></script>
 </head>
 <body>
-<nav class="navbar navbar-dark bg-dark">
+<nav class="navbar navbar-dark bg-dark ">
     <ul class="nav">
-        <ul class="nav">
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/sales}">전체 판매현황</a>
+                <a class="nav-link" style="color:white;" th:href="@{/sales}">전체 판매현황</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/sales/date}">일별 판매현황</a>
+                <a class="nav-link" style="color:white;" th:href="@{/sales/date}">일별 판매현황</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/sales/goods}">품목별 판매현황</a>
+                <a class="nav-link" style="color:white;" th:href="@{/sales/goods}">품목별 판매현황</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/sales/statistics}">통계</a>
+                <a class="nav-link"style="color:white;"  th:href="@{/sales/statistics}">통계</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " th:href="@{sales/manage}">재고 관리</a>
+                <a class="nav-link"style="color:white;" th:href="@{sales/manage}">재고 관리</a>
             </li>
-        </ul>
     </ul>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+        </ul>
+        <form class="d-flex">
+            <a th:href="@{/login}" class="btn btn-outline-dark" type="submit">관리자</a>
+        </form>
+    </div>
 
-    
 </nav>
 
 <h1 style="margin-top : 50px;" th:text="|전체 판매량 : ${#numbers.formatInteger(total, 3, 'COMMA')}원|">판매량</h1>
 
-<a th:href="@{/excel/download}">다운로드</a>
+
 <table class="table" style="margin-top : 30px;">
     <thead class="table-dark">
     <tr>
@@ -70,12 +74,6 @@
         </li>
     </ul>
 </nav>
-<form th:action="@{/excel/upload}" method="POST" enctype="multipart/form-data" id="excelUpload">
-    <input type="file" th:name="file">
-    <input th:type="submit" value="제출" />
-</form>
-<script th:inline="javascript">
-
-    </script>
+<a th:href="@{/excel/download}" class="btn btn-secondary">액셀 다운로드</a>
 </body>
 </html>

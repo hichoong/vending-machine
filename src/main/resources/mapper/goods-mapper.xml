@@ -34,7 +34,9 @@
          ]]>
     </select>
 
+
+
     <delete id="deleteGoods">
-        truncate goods
+        delete from goods
     </delete>
 </mapper>

@@ -4,39 +4,34 @@
 <mapper namespace="com.ezace.vendingmachine.repository.SalesMapper">
     <select id="findAllSales" resultType="com.ezace.vendingmachine.domain.dto.response.SalesResponse">
         select
-        s.id, g.name, s.count, g.price, s.sales_date
+        s.id, s.name, s.count, s.price, s.sales_date
         from sales s
-        inner join goods g ON s.goods_id = g.id
         order by s.id  desc
     </select>
 
     <insert id="insertSales">
         insert into sales (
-            goods_id
+            name, price
         )
         values (
-            #{goodsId}
+            #{name}, #{price}
         )
     </insert>
 
     <select id="findAllByPagingSales" resultType="com.ezace.vendingmachine.domain.dto.response.SalesResponse">
         select
-        s.id, g.name, s.count, g.price, s.sales_date
-        from sales s
-        inner join goods g ON s.goods_id = g.id
-        order by s.sales_date  desc
+        id, name, count, price, sales_date
+        from sales
     </select>
 
     <select id="findBySalesDate" resultType="com.ezace.vendingmachine.domain.dto.response.SalesResponse">
-        select s.id, g.name, s.count, g.price, s.sales_date
+        select s.id, s.name,s.price, s.count, s.sales_date
         from sales s
-        inner join goods g ON s.goods_id = g.id
         where date(s.sales_date) = #{firstChoiceDate}
     </select>
 
     <select id="findByGoods" resultType="com.ezace.vendingmachine.domain.dto.response.SalesResponse">
-        select g.name, sum(g.price) as price from sales s
-        inner join goods g ON s.goods_id = g.id
-        group by g.name with rollup
+        select s.name, sum(s.price) as price from sales s
+        group by s.name with rollup
     </select>
 </mapper>

@@ -40,11 +40,13 @@ public class ExcelContoller {
 
     @PostMapping("/excel/upload")
     public String  excelUpload(@RequestParam("file") MultipartFile file, Model model) {
-        excelService.excelUpload(file, model);
+       excelService.excelUpload(file, model);
         if (model.getAttribute("error") != null) {
             model.addAttribute("error", "액셀 파일만 가능합니다.");
-            return "redirect:/sales";
+            return "redirect:/sales-manage";
         }
-        return "redirect:/sales";
+
+        model.addAttribute("salesList", goodsService.findAllGoods());
+        return "redirect:/sales/manage";
     }
 }

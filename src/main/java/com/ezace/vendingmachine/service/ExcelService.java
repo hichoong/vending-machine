@@ -9,6 +9,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -84,6 +85,7 @@ public class ExcelService {
             }
         }
     }
+    @Transactional
     public Model excelUpload(MultipartFile file, Model model) {
         String extension = FilenameUtils.getExtension(file.getOriginalFilename()); // 3
         if (!extension.equals("xlsx") && !extension.equals("xls")) {
@@ -99,23 +101,23 @@ public class ExcelService {
         }
         Sheet worksheet = workbook.getSheetAt(0);
         //DB 데이터 품목 삭제
-        /*goodsService.deleteGoods();*/
-        //DB에 새로 넣을 데이터 구성
+        goodsService.deleteGoods();
 
-            for (int i = 1; i < worksheet.getPhysicalNumberOfRows()-1; i++) {
-                Row row = worksheet.getRow(i);
-                GoodsVo goodsVo = new GoodsVo();
-                goodsVo.setId((long)row.getCell(0).getNumericCellValue());
-                goodsVo.setName(row.getCell(1).getStringCellValue());
-                goodsVo.setPrice((int)row.getCell(2).getNumericCellValue());
-                goodsVo.setCount((int)row.getCell(3).getNumericCellValue());
-                //재고가 30을 넘길 시 30으로 조정
-                if (goodsVo.getCount() > 30) {
-                    goodsVo.setCount(30);
-                }
-                goodsVo.setImage(row.getCell(4).getStringCellValue());
-                goodsService.insertGoods(goodsVo);
+        //DB에 새로 넣을 데이터 구성
+        for (int i = 1; i < worksheet.getPhysicalNumberOfRows(); i++) {
+            Row row = worksheet.getRow(i);
+            GoodsVo goodsVo = new GoodsVo();
+            goodsVo.setId((long)row.getCell(0).getNumericCellValue());
+            goodsVo.setName(row.getCell(1).getStringCellValue());
+            goodsVo.setPrice((int)row.getCell(2).getNumericCellValue());
+            goodsVo.setCount((int)row.getCell(3).getNumericCellValue());
+            //재고가 30을 넘길 시 30으로 조정
+            if (goodsVo.getCount() > 30) {
+                goodsVo.setCount(30);
             }
+            goodsVo.setImage(row.getCell(4).getStringCellValue());
+            goodsService.insertGoods(goodsVo);
+        }
         }catch (IOException e) {
             e.printStackTrace();
         }

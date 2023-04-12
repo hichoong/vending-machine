@@ -18,7 +18,7 @@ public interface SalesMapper {
 
     List<SalesResponse> findAllSales();
     Page<SalesResponse> findAllByPagingSales();
-    void insertSales(Long id);
+    void insertSales(String name, int price);
     List<SalesResponse> findBySalesDate(SelectDate selectDate);
     Page<SalesResponse> findBySalesDate(String firstChoiceDate);
     List<SalesResponse> findByGoods();

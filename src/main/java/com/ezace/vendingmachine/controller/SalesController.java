@@ -2,6 +2,8 @@ package com.ezace.vendingmachine.controller;
 
 import com.ezace.vendingmachine.domain.dto.request.SelectDate;
 import com.ezace.vendingmachine.domain.dto.response.SalesResponse;
+import com.ezace.vendingmachine.domain.vo.GoodsVo;
+import com.ezace.vendingmachine.service.GoodsService;
 import com.ezace.vendingmachine.service.SalesService;
 import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,7 @@ import java.util.List;
 public class SalesController {
 
     private final SalesService salesService;
+    private final GoodsService goodsService;
 
     @GetMapping("/sales")
     public String salesList(Model model, @RequestParam(required = false, defaultValue = "1") int pageNum) {
@@ -64,6 +67,14 @@ public class SalesController {
         model.addAttribute("salesList", salesList);
         return "sales-goods";
     }
+    @GetMapping("/sales/manage")
+    public String modifyGoods(Model model) {
+        log.info("재고관리 서비스");
+        List<GoodsVo> salesList = goodsService.findAllGoods();
+        log.info("품목 = {}", salesList );
+        model.addAttribute("salesList", salesList);
+        return "sales-manage";
+    }
 
     private String nowDateFormat() {
         Date now = new Date();
@@ -71,5 +82,6 @@ public class SalesController {
         String nowDate = simpleDateFormat.format(now);
         return nowDate;
     }
+
 
 }
