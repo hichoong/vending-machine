@@ -1,6 +1,5 @@
 package com.ezace.vendingmachine.config;
 
-import org.jetbrains.annotations.NotNull;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,11 +17,13 @@ public class SecurityConfig {
                 http.csrf().disable()
                 .authorizeRequests()
                 .anyRequest().permitAll()
-
                 .and()
-                .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/")
+                    .formLogin()
+                    .loginPage("/login")
+                    .defaultSuccessUrl("/")
+                .and()
+                    .logout()
+                    .logoutSuccessUrl("/main")
                 .and().build();
     }
     @Bean

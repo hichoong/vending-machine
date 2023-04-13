@@ -2,16 +2,11 @@ package com.ezace.vendingmachine.service;
 
 import com.ezace.vendingmachine.domain.dto.request.SelectDate;
 import com.ezace.vendingmachine.domain.dto.response.SalesResponse;
-import com.ezace.vendingmachine.domain.vo.SalesVo;
 import com.ezace.vendingmachine.repository.SalesMapper;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Service

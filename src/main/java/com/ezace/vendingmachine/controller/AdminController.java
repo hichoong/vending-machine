@@ -2,7 +2,6 @@ package com.ezace.vendingmachine.controller;
 
 import com.ezace.vendingmachine.domain.dto.request.JoinForm;
 import com.ezace.vendingmachine.domain.dto.request.LoginRequest;
-import com.ezace.vendingmachine.domain.vo.AdminVo;
 import com.ezace.vendingmachine.service.AdminService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

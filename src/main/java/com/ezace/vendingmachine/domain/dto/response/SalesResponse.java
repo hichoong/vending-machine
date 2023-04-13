@@ -1,7 +1,6 @@
 package com.ezace.vendingmachine.domain.dto.response;
 
 import lombok.Data;
-
 import java.time.LocalDateTime;
 
 @Data

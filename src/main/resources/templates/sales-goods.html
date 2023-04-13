@@ -26,6 +26,9 @@
         <li class="nav-item">
             <a class="nav-link"style="color:white;" th:href="@{/sales/manage}">재고 관리</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link"style="color:white;" th:href="@{/logout}">로그아웃</a>
+        </li>
     </ul>
 </nav>
 <h1 style="margin-top : 50px;" th:text="|품목별 판매 현황|">판매량</h1>
@@ -33,6 +36,7 @@
     <thead class="table-dark">
     <tr>
         <th scope="col">상품</th>
+        <th scope="col">판매 수량</th>
         <th scope="col">판매액</th>
     </tr>
     </thead>
@@ -44,7 +48,8 @@
         <th:block th:if="${sales.name == null}">
             <td th:text="|합계|">품목</td>
         </th:block>
-            <td th:text="|${#numbers.formatInteger(sales.price, 3, 'COMMA')}원|">금액</td>
+        <td th:text="${sales.count}">수량</td>
+        <td th:text="|${#numbers.formatInteger(sales.price, 3, 'COMMA')}원|">금액</td>
     </tr>
     </tbody>
 </table>

@@ -25,6 +25,9 @@
         <li class="nav-item">
             <a class="nav-link"style="color:white;" th:href="@{sales/manage}">재고 관리</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link"style="color:white;" th:href="@{/logout}">로그아웃</a>
+        </li>
     </ul>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
@@ -40,19 +43,19 @@
     <thead class="table-dark">
     <tr>
         <!--<th scope="col">id</th>-->
-        <th scope="col">상품</th>
-        <th scope="col">판매 수</th>
-        <th scope="col">판매 가격</th>
-        <th scope="col">판매 일자</th>
+        <th scope="col">상품번호</th>
+        <th scope="col">제품이름</th>
+        <th scope="col">재고량</th>
+        <th scope="col">판매가격</th>
         <th scope="col">상품이미지</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="sales : ${salesList}">
         <td th:text="${sales.id}">상품번호</td>
-        <td th:text="${sales.name}">상품이름</td>
-        <td th:text="${sales.count}">수량</td>
-        <td th:text="${sales.price}">판매 가격</td>
+        <td th:text="${sales.name}">제품이름</td>
+        <td th:text="${sales.count}">재고량</td>
+        <td th:text="|${#numbers.formatInteger(sales.price, 3, 'COMMA')}원|">판매가격</td>
         <td><img th:src="@{/images/} + ${sales.image} + .png" style="width:40px; height:40px;"/></td>
     </tr>
     </tbody>

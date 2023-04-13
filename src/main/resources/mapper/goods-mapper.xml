@@ -34,8 +34,6 @@
          ]]>
     </select>
 
-
-
     <delete id="deleteGoods">
         delete from goods
     </delete>

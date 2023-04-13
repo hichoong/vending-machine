@@ -14,7 +14,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="#!">충희네 자판기</a>
+                <a class="navbar-brand" href="/main">충희네 자판기</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
@@ -84,7 +84,8 @@
         </section>
         <!-- Footer-->
         <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
+            <div class="container"><p class="m-0 text-center text-white">제작일자 &copy; 충희네 자판기 2023-04-14 </p></div>
+            <div class="container"><p class="m-0 text-center text-white">회사위치 &copy; 서울시 금천구 IT미래타워</p></div>
         </footer>
         <!-- Core theme JS-->
         <script type="text/javascript" th:src="@{/js/scripts.js}"></script>
@@ -129,14 +130,13 @@
                 data:JSON.stringify(input),
                 dataType : "json",
                 success:function(data) {
-                    alert("통신성공");
                     alert(data.msg);
                      resultElement.innerText = data.money;
                     $('#'+count).html("수량 : " + data.count);
                     location.reload;
                 },
                 error : function(e) {
-                   alert("통신실패");
+                   alert("구매에 오류가 발생했습니다.");
                 }
             });
          }

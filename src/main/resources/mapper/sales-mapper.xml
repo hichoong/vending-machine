@@ -31,7 +31,8 @@
     </select>
 
     <select id="findByGoods" resultType="com.ezace.vendingmachine.domain.dto.response.SalesResponse">
-        select s.name, sum(s.price) as price from sales s
+        select s.name, sum(s.price) as price, sum(count) as count
+        from sales s
         group by s.name with rollup
     </select>
 </mapper>
