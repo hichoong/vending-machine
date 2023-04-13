@@ -31,16 +31,16 @@
     </ul>
 </nav>
 
-<h1 style="margin-top : 30px; margin-bottom : 30px;">일별판매량</h1>
+<h1 style="margin-top : 30px; margin-bottom : 30px;">일별 판매현황</h1>
 <form action="/sales/date" method="get" id="sendForm">
     <p>선택한 날짜 : <input type="text" id="datepicker" name="firstChoiceDate"></p>
 </form>
 
 <th:block th:if="${#lists.isEmpty(salesList.getList())}">
-    <h1 style="margin-top : 50px;" th:text="|${firstChoiceDate}의 판매량 : 0원|">판매량</h1>
+    <h1 style="margin-top : 50px;" th:text="|${firstChoiceDate}일의 판매금액 : 0원|">판매량</h1>
 </th:block>
 <th:block th:if="${!#lists.isEmpty(salesList.getList())}">
-    <h1 style="margin-top : 50px;" th:text="|${firstChoiceDate}의 판매량 : ${#numbers.formatInteger(total, 3, 'COMMA')}원|">판매량</h1>
+    <h1 style="margin-top : 50px;" th:text="|${firstChoiceDate}일의 판매금액 : ${#numbers.formatInteger(total, 3, 'COMMA')}원|">판매량</h1>
 </th:block>
 
 
@@ -60,7 +60,7 @@
     <tr th:each="sales : ${salesList.getList()}">
         <td th:text="${sales.getName()}">상품</td>
         <td th:text="${sales.getCount()}">판매 수</td>
-        <td th:text="${sales.getPrice()}">판매 가격</td>
+        <td th:text="${#numbers.formatInteger(sales.price, 3, 'COMMA')}">판매 가격</td>
         <td th:text="${#temporals.format(sales.salesDate, 'yyyy-MM-dd HH:mm:ss')}">판매 일자</td>
     </tr>
     </tbody>
