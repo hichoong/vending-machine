@@ -22,7 +22,6 @@ public class GoodsContoller {
     public List<GoodsVo> findAllGoods() {
         return goodsService.findAllGoods();
     }
-
     @PatchMapping("/goods/{id}")
     public void purchase(@PathVariable Long id){
         GoodsVo goodsVo = goodsService.findById(id);
@@ -30,7 +29,6 @@ public class GoodsContoller {
             goodsService.modifyGoods(id);
         }
     }
-
     @PostMapping("/goods/purchase")
     public @ResponseBody GoodsResponse purchase(@RequestBody BuyGoods buyGoods) {
         log.info("받은 정보 값 = {}, {}",buyGoods.getId(), buyGoods.getMoney() );

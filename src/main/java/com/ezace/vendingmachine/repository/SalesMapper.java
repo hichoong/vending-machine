@@ -17,4 +17,5 @@ public interface SalesMapper {
     List<SalesResponse> findBySalesDate(SelectDate selectDate);
     Page<SalesResponse> findBySalesDate(String firstChoiceDate);
     List<SalesResponse> findByGoods();
+    List<SalesResponse> findByGoodsChart();
 }

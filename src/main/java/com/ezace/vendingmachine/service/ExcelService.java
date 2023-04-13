@@ -88,8 +88,7 @@ public class ExcelService {
     public Model excelUpload(MultipartFile file, Model model) {
         String extension = FilenameUtils.getExtension(file.getOriginalFilename()); // 3
         if (!extension.equals("xlsx") && !extension.equals("xls")) {
-            model.addAttribute("error", "액셀 파일만 넣어주세요.");
-            return model;
+            throw new RuntimeException("엑셀 파일만 넣어주세요.");
         }
         Workbook workbook = null;
         try {

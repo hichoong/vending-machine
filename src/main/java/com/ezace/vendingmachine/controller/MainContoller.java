@@ -17,9 +17,6 @@ import java.util.stream.Collectors;
 @Slf4j
 public class MainContoller {
     private final GoodsService goodsService;
-    private final AdminService adminService;
-    private final SalesService salesService;
-
     @GetMapping("/main")
     public String main(Model model) {
         log.info("main페이지 호출");

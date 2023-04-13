@@ -25,7 +25,6 @@ public class ExcelContoller {
     public void excelDownLoad(HttpServletResponse response)   {
         excelService.excelDownloadByAllSales(response);
     }
-
     @PostMapping("/excel/upload")
     public String  excelUpload(@RequestParam("file") MultipartFile file, Model model) {
        excelService.excelUpload(file, model);
@@ -33,7 +32,6 @@ public class ExcelContoller {
             model.addAttribute("error", "액셀 파일만 가능합니다.");
             return "redirect:/sales-manage";
         }
-
         model.addAttribute("salesList", goodsService.findAllGoods());
         return "redirect:/sales/manage";
     }

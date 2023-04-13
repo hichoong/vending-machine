@@ -37,4 +37,8 @@ public class SalesService {
     public List<SalesResponse> findByGoods() {
         return salesMapper.findByGoods();
     }
+
+    public List<SalesResponse> findByGoodsChart() {
+        return salesMapper.findByGoodsChart();
+    }
 }

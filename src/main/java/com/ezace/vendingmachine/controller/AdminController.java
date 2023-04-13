@@ -26,7 +26,6 @@ public class AdminController {
         model.addAttribute("loginRequest", new LoginRequest());
         return "login";
     }
-
     @PostMapping("/login-admin")
     public String login(@ModelAttribute("loginRequest") LoginRequest loginRequest, HttpSession session, Model model) {
         log.info("로그인 : {}", loginRequest);
@@ -39,14 +38,12 @@ public class AdminController {
         session.setAttribute("loginUser", model.getAttribute("admin"));
         return "redirect:/sales";
     }
-
     @GetMapping("/sign")
     public String sign(Model model) {
         log.info("회원가입 페이지 호출");
         model.addAttribute("joinForm", new JoinForm());
         return "sign";
     }
-
     @PostMapping("/sign")
     public String createAdmin(@Valid JoinForm joinForm, BindingResult bindingResult, Model model) {
         log.info("회원가입 정보 전달받음");

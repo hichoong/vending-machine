@@ -20,11 +20,9 @@ import java.util.List;
 public class AdminService {
     private final AdminMapper adminMapper;
     private final PasswordEncoder passwordEncoder;
-
     public List<AdminVo> getAdminList() {
         return adminMapper.findAll();
     }
-
     public Model login(LoginRequest loginRequest, Model model) {
         log.info("로그인 서비스 실행");
         AdminVo admin = adminMapper.findByName(loginRequest.getName());
@@ -41,7 +39,6 @@ public class AdminService {
         model.addAttribute("admin", admin);
         return model;
     }
-
     public Model createAdmin(JoinForm joinForm, Model model) {
         if (nameCheck(joinForm.getName()) != null) {
              model.addAttribute("msg1", "이미 해당 이름이 존재합니다.");
@@ -60,7 +57,6 @@ public class AdminService {
         model.addAttribute("admin", adminVo);
         return model;
     }
-
     private AdminVo nameCheck(String name) {
         return adminMapper.findByName(name);
     }

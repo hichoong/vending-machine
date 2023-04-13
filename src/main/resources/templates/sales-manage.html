@@ -6,6 +6,7 @@
     <link th:href="@{/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
     <script th:href="@{/bootstrap/js/bootstrap.min.js}"></script>
     <script th:href="@{/js/jquery-3.6.4.min.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-dark bg-dark ">
@@ -18,9 +19,6 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" style="color:white;" th:href="@{/sales/goods}">품목별 판매현황</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link"style="color:white;"  th:href="@{/sales/statistics}">통계</a>
         </li>
         <li class="nav-item">
             <a class="nav-link"style="color:white;" th:href="@{sales/manage}">재고 관리</a>
@@ -61,8 +59,8 @@
     </tbody>
 </table>
 
-<form th:action="@{/excel/upload}" method="POST" enctype="multipart/form-data" id="excelUpload">
-    <input type="file" th:name="file">
+<form th:action="@{/excel/upload}" method="POST" enctype="multipart/form-data" id="excelUpload" >
+    <input type="file" th:name="file" accept=".xls,.xlsx">
     <input th:type="submit" value="제출" />
 </form>
 <script th:inline="javascript">

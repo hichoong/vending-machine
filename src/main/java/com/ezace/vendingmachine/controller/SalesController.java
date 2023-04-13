@@ -24,7 +24,6 @@ public class SalesController {
     private final SalesService salesService;
     private final GoodsService goodsService;
     private final HttpSession session;
-
     @GetMapping("/sales")
     public String salesList(Model model, @RequestParam(required = false, defaultValue = "1") int pageNum) {
         if(session.getAttribute("loginUser") == null) {
@@ -49,7 +48,7 @@ public class SalesController {
         }
         log.info("선택한 날짜 : {}", firstChoiceDate);
         PageInfo<SalesResponse> salesList = new PageInfo<>(salesService.findBySalesDate(pageNum, firstChoiceDate), 10);
-       log.info("해당 정보 = {}", salesList);
+        log.info("해당 정보 = {}", salesList);
         model.addAttribute("salesList", salesList);
         List<SalesResponse> totalSales = salesService.findBySalesDate(firstChoiceDate);
         int total = totalSales.stream().mapToInt(SalesResponse::getPrice).sum();
@@ -57,17 +56,6 @@ public class SalesController {
         model.addAttribute("firstChoiceDate", firstChoiceDate);
         return "sales-date";
     }
-
-    @GetMapping("/sales/statistics")
-    public String selectStatistics(Model model) {
-        if(session.getAttribute("loginUser") == null) {
-            throw new RuntimeException("해당경로에 대한 접근권한이 없습니다.");
-        }
-        log.info("통계 페이지");
-        List<SalesResponse> allSales = salesService.findAllSales();
-        return "sales-statistics";
-    }
-
     @GetMapping("/sales/goods")
     public String salesGoods(Model model) {
         if(session.getAttribute("loginUser") == null) {
@@ -77,6 +65,8 @@ public class SalesController {
         List<SalesResponse> salesList = salesService.findByGoods();
         log.info("품목 = {}", salesList );
         model.addAttribute("salesList", salesList);
+        List<SalesResponse> salesServiceByGoodsChart = salesService.findByGoodsChart();
+        model.addAttribute("salesList2", salesServiceByGoodsChart);
         return "sales-goods";
     }
     @GetMapping("/sales/manage")
@@ -90,7 +80,6 @@ public class SalesController {
         model.addAttribute("salesList", salesList);
         return "sales-manage";
     }
-
     private String nowDateFormat() {
         Date now = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
