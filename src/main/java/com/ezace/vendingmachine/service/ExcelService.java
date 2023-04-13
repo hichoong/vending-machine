@@ -105,6 +105,18 @@ public class ExcelService {
         for (int i = 1; i < worksheet.getPhysicalNumberOfRows(); i++) {
             Row row = worksheet.getRow(i);
             GoodsVo goodsVo = new GoodsVo();
+            if(row.getCell(0).getCellType() != CellType.NUMERIC) {
+                throw new RuntimeException(i + " 행의 첫번째 컬럼값을 확인해 주세요.");
+            }
+            if(row.getCell(1).getCellType() != CellType.STRING) {
+                throw new RuntimeException(i + " 행의 두번째 컬럼값을 확인해 주세요.");
+            }
+            if(row.getCell(2).getCellType() != CellType.NUMERIC) {
+                throw new RuntimeException(i + " 행의 세번째 컬럼값을 확인해 주세요.");
+            }
+            if(row.getCell(3).getCellType() != CellType.NUMERIC) {
+                throw new RuntimeException(i + " 행의 네번째 컬럼값을 확인해 주세요.");
+            }
             goodsVo.setId((long)row.getCell(0).getNumericCellValue());
             goodsVo.setName(row.getCell(1).getStringCellValue());
             goodsVo.setPrice((int)row.getCell(2).getNumericCellValue());
