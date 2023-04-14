@@ -11,6 +11,15 @@ spring:
     pathmatch:
       matching-strategy: ant_path_matcher
 
+  devtools:
+    restart:
+      enabled: true
+    livereload:
+      enabled: true
+
+  thymeleaf:
+    cache: false
+
   mail:
     host: smtp.gmail.com
     port: 587

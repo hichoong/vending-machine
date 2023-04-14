@@ -59,6 +59,10 @@ public class GoodsService {
             goodsResponse.setMoney(buyGoods.getMoney());
             return goodsResponse;
         }
+        if(goodsVo.getCount() == 0) {
+            goodsResponse.setMsg("재고가 부족해서 구매할 수 없습니다.");
+            return goodsResponse;
+        }
         log.info("상품정보 : {}", goodsVo);
         goodsMapper.modifyGoods(goodsVo.getId());
         salesMapper.insertSales(goodsVo.getName(),goodsVo.getPrice());

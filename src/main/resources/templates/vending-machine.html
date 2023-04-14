@@ -1,95 +1,94 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>자판기 메인</title>
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
-        <script th:src="@{/js/jquery-3.6.4.min.js}"></script>
-    </head>
-    <body>
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="/main">충희네 자판기</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                    </ul>
-                    <form class="d-flex">
-                        <a th:href="@{/login}" class="btn btn-outline-dark" type="submit">관리자로그인</a>
-                    </form>
-                </div>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>자판기 메인</title>
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+    <script th:src="@{/js/jquery-3.6.4.min.js}"></script>
+</head>
+<body>
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="/main">충희네 자판기</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+            </ul>
+            <form class="d-flex">
+                <a th:href="@{/login}" class="btn btn-outline-dark" type="submit">관리자로그인</a>
+            </form>
+        </div>
+    </div>
+</nav>
+<!-- Header-->
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">자판기</h1>
+            <p class="lead fw-normal text-white-50 mb-0">현재 금액</p>
+            <p class="lead fw-normal text-danger mb-0" id="money" >0</p>
+
+            <div>
+                <h2>금액 추가</h2>
+                <button class="btn btn-success" onclick="addMoney(100)" value="100" >100</button>
+                <button class="btn btn-success" onclick="addMoney(500)" value="500"  >500</button>
+                <button class="btn btn-success" onclick="addMoney(1000)" value="1000" >1000</button>
+                <button class="btn btn-danger" onclick="addMoney(0)">반환하기</button>
             </div>
-        </nav>
-        <!-- Header-->
-        <header class="bg-dark py-5">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">자판기</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">현재 금액</p>
-                    <p class="lead fw-normal text-danger mb-0" id="money" >0</p>
 
-                    <div>
-                        <h2>금액 추가</h2>
-                        <button class="btn btn-success" onclick="addMoney(100)" value="100" >100</button>
-                        <button class="btn btn-success" onclick="addMoney(500)" value="500"  >500</button>
-                        <button class="btn btn-success" onclick="addMoney(1000)" value="1000" >1000</button>
-                        <button class="btn btn-danger" onclick="addMoney(0)">반환하기</button>
-                    </div>
+        </div>
+    </div>
+</header>
+<!-- Section-->
 
-                </div>
-            </div>
-        </header>
-        <!-- Section-->
-
-        <section class="py-5">
-            <div class="container px-4 px-lg-5 mt-5">
-                <div class="row gx-3 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-3 justify-content-left">
-                    <th:block th:each="goods : ${goodsList}">
-                        <form action="th:" method="POST">
-                            <div class="col mb-5">
-                            <div class="card h-100">
-                                <!-- Product image-->
-                                <img class="card-img-top" th:src="@{images/} + ${goods.image} + .png" alt="..." style="width:200px; height:300px; margin-left: 80px;"  />
-                                <!-- Product details-->
-                                <div class="card-body p-4">
-                                    <div class="text-center" id="${goods.id}">
-                                        <!-- Product name-->
-                                        <input type="hidden" th:id="${goods.id}" th:value="${goods.price}" />
-                                        <!-- Product name-->
-                                        <h5 class="fw-bolder" th:text="${goods.name}" th:value="${goods.name}" id="name">이름</h5>
-                                        <!-- Product price-->
-                                        <span th:text="|가격 :  ${goods.price}|" class="text-danger" th:value="${goods.price}" th:id="|price${goods.id}|">가격</span>
-                                        <br>
-                                        <span th:text="|수량 :  ${goods.count}|" th:value="${goods.count}" th:id="|count${goods.id}|">수량</span>
-                                    </div>
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-3 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-3 justify-content-left">
+            <th:block th:each="goods : ${goodsList}">
+                <form action="th:" method="POST">
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" th:src="@{images/} + ${goods.image} + .png" alt="..." style="width:200px; height:300px; margin-left: 80px;"  />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center" id="${goods.id}">
+                                    <!-- Product name-->
+                                    <input type="hidden" th:id="${goods.id}" th:value="${goods.price}" />
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder" th:text="${goods.name}" th:value="${goods.name}" id="name">이름</h5>
+                                    <!-- Product price-->
+                                    <span th:text="|가격 :  ${goods.price}|" class="text-danger" th:value="${goods.price}" th:id="|price${goods.id}|">가격</span>
+                                    <br>
+                                    <span th:text="|수량 :  ${goods.count}|" th:value="${goods.count}" th:id="|count${goods.id}|">수량</span>
                                 </div>
-                                <!-- Product actions-->
+                            </div>
+                            <!-- Product actions-->
 
-                                <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                    <div class="text-center">
-                                        <a class="btn btn-outline-dark mt-auto" th:href="|javascript:purchase(${goods.id})|" id="purchase">구입</a>
-                                    </div>
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center">
+                                    <a class="btn btn-outline-dark mt-auto" th:href="|javascript:purchase(${goods.id})|" id="purchase">구입</a>
                                 </div>
                             </div>
                         </div>
-                    </form>
-                    </th:block>
-                </div>
-            </div>
-        </section>
-        <!-- Footer-->
-        <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">제작일자 &copy; 충희네 자판기 2023-04-14 </p></div>
-            <div class="container"><p class="m-0 text-center text-white">회사위치 &copy; 서울시 금천구 IT미래타워</p></div>
-        </footer>
-        <!-- Core theme JS-->
-        <script type="text/javascript" th:src="@{/js/scripts.js}"></script>
-        <script th:inline="javascript">
+                    </div>
+                </form>
+            </th:block>
+        </div>
+    </div>
+    <!-- Footer-->
+    <footer class="py-5 bg-dark">
+        <div class="container"><p class="m-0 text-center text-white">제작일자 &copy; 충희네 자판기 2023-04-14 </p></div>
+        <div class="container"><p class="m-0 text-center text-white">회사위치 &copy; 서울시 금천구 IT미래타워</p></div>
+    </footer>
+    <!-- Core theme JS-->
+    <script type="text/javascript" th:src="@{/js/scripts.js}"></script>
+    <script th:inline="javascript">
 
         function addMoney(type)  {
             // 결과를 표시할 element
@@ -141,5 +140,5 @@
             });
          }
         </script>
-    </body>
+</body>
 </html>
