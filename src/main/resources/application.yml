@@ -11,6 +11,20 @@ spring:
     pathmatch:
       matching-strategy: ant_path_matcher
 
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ksky8013
+    password: azzxpfgmvffcstyv
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+          auth: true
+          timeout: 5000
+
+
   servlet:
     multipart:
       max-file-size: 10MB

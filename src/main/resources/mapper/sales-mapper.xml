@@ -22,12 +22,14 @@
         select
         id, name, count, price, sales_date
         from sales
+        order by sales_date desc
     </select>
 
     <select id="findBySalesDate" resultType="com.ezace.vendingmachine.domain.dto.response.SalesResponse">
         select s.id, s.name,s.price, s.count, s.sales_date
         from sales s
         where date(s.sales_date) = #{firstChoiceDate}
+        order by s.sales_date desc
     </select>
 
     <select id="findByGoods" resultType="com.ezace.vendingmachine.domain.dto.response.SalesResponse">
@@ -37,8 +39,8 @@
     </select>
 
     <select id="findByGoodsChart" resultType="com.ezace.vendingmachine.domain.dto.response.SalesResponse">
-    select s.name, sum(s.price) as price, sum(count) as count
-    from sales s
-    group by s.name
+        select s.name, sum(s.price) as price, sum(count) as count
+        from sales s
+        group by s.name
     </select>
 </mapper>

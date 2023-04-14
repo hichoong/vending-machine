@@ -2,6 +2,7 @@ package com.ezace.vendingmachine.service;
 
 import com.ezace.vendingmachine.domain.dto.request.BuyGoods;
 import com.ezace.vendingmachine.domain.dto.response.GoodsResponse;
+import com.ezace.vendingmachine.domain.vo.EmailMessage;
 import com.ezace.vendingmachine.domain.vo.GoodsVo;
 import com.ezace.vendingmachine.repository.GoodsMapper;
 import com.ezace.vendingmachine.repository.SalesMapper;
@@ -18,6 +19,7 @@ import java.util.List;
 public class GoodsService {
     private final GoodsMapper goodsMapper;
     private final SalesMapper salesMapper;
+    private final EmailService emailService;
 
     public List<GoodsVo> findAllGoods() {
         return goodsMapper.findAllGoods();
@@ -69,6 +71,10 @@ public class GoodsService {
         goodsResponse.setCount(goodsVo.getCount());
         goodsResponse.setMoney(calculate);
         goodsResponse.setMsg(goodsResponse.getName() + " 구매가 완료되었습니다.");
+        if (goodsVo.getCount() <= 5) {
+            EmailMessage mail = emailService.createMail(goodsVo.getName());
+            emailService.SendMail(mail);
+        }
         return goodsResponse;
     }
 }

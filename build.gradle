@@ -38,6 +38,8 @@ dependencies {
 	implementation 'com.mysql:mysql-connector-j:8.0.32'
 	//pageHelper
 	implementation 'com.github.pagehelper:pagehelper-spring-boot-starter:1.4.6'
+	//java mail
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	implementation 'org.jetbrains:annotations:23.0.0'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'

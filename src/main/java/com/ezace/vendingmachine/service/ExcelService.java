@@ -8,6 +8,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -85,10 +86,11 @@ public class ExcelService {
         }
     }
     @Transactional
-    public Model excelUpload(MultipartFile file, Model model) {
+    public Model excelUpload(@NotNull MultipartFile file, Model model) {
         String extension = FilenameUtils.getExtension(file.getOriginalFilename()); // 3
         if (!extension.equals("xlsx") && !extension.equals("xls")) {
-            throw new RuntimeException("엑셀 파일만 넣어주세요.");
+            model.addAttribute("error", "액셀파일만 가능합니다.");
+            return model;
         }
         Workbook workbook = null;
         try {
@@ -100,21 +102,20 @@ public class ExcelService {
         Sheet worksheet = workbook.getSheetAt(0);
         //DB 데이터 품목 삭제
         goodsService.deleteGoods();
-
         //DB에 새로 넣을 데이터 구성
         for (int i = 1; i < worksheet.getPhysicalNumberOfRows(); i++) {
             Row row = worksheet.getRow(i);
             GoodsVo goodsVo = new GoodsVo();
-            if(row.getCell(0).getCellType() != CellType.NUMERIC) {
+            if(row.getCell(0).getCellType() != CellType.NUMERIC || row.getCell(0) == null) {
                 throw new RuntimeException(i + " 행의 첫번째 컬럼값을 확인해 주세요.");
             }
-            if(row.getCell(1).getCellType() != CellType.STRING) {
+            if(row.getCell(1).getCellType() != CellType.STRING || row.getCell(1) == null) {
                 throw new RuntimeException(i + " 행의 두번째 컬럼값을 확인해 주세요.");
             }
-            if(row.getCell(2).getCellType() != CellType.NUMERIC) {
+            if(row.getCell(2).getCellType() != CellType.NUMERIC || row.getCell(2) == null) {
                 throw new RuntimeException(i + " 행의 세번째 컬럼값을 확인해 주세요.");
             }
-            if(row.getCell(3).getCellType() != CellType.NUMERIC) {
+            if(row.getCell(3).getCellType() != CellType.NUMERIC || row.getCell(3) == null) {
                 throw new RuntimeException(i + " 행의 네번째 컬럼값을 확인해 주세요.");
             }
             goodsVo.setId((long)row.getCell(0).getNumericCellValue());
