@@ -4,6 +4,7 @@ import com.ezace.vendingmachine.domain.dto.request.BuyGoods;
 import com.ezace.vendingmachine.domain.dto.response.GoodsResponse;
 import com.ezace.vendingmachine.domain.vo.EmailMessage;
 import com.ezace.vendingmachine.domain.vo.GoodsVo;
+import com.ezace.vendingmachine.domain.vo.Telegram;
 import com.ezace.vendingmachine.repository.GoodsMapper;
 import com.ezace.vendingmachine.repository.SalesMapper;
 import lombok.RequiredArgsConstructor;
@@ -78,6 +79,7 @@ public class GoodsService {
         if (goodsVo.getCount() <= 5) {
             EmailMessage mail = emailService.createMail(goodsVo.getName());
             emailService.SendMail(mail);
+            Telegram.sendTelegramMessage(goodsVo.getName());
         }
         return goodsResponse;
     }

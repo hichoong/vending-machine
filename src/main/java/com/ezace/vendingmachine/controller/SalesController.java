@@ -37,8 +37,11 @@ public class SalesController {
         model.addAttribute("total", total);
         return "sales";
     }
+
     @GetMapping("/sales/date")
-    public String selectDate(@RequestParam(required = false)String firstChoiceDate, Model model, @RequestParam(required = false, defaultValue = "1")int pageNum) {
+    public String selectDate(@RequestParam(required = false) String firstChoiceDate,
+                             @RequestParam(required = false, defaultValue = "1") int pageNum,
+                             Model model) {
         if(session.getAttribute("loginUser") == null) {
             throw new RuntimeException("해당경로에 대한 접근권한이 없습니다.");
         }
@@ -56,6 +59,7 @@ public class SalesController {
         model.addAttribute("firstChoiceDate", firstChoiceDate);
         return "sales-date";
     }
+
     @GetMapping("/sales/goods")
     public String salesGoods(Model model) {
         if(session.getAttribute("loginUser") == null) {
@@ -69,6 +73,7 @@ public class SalesController {
         model.addAttribute("salesList2", salesServiceByGoodsChart);
         return "sales-goods";
     }
+
     @GetMapping("/sales/manage")
     public String modifyGoods(Model model) {
         if(session.getAttribute("loginUser") == null) {
@@ -80,6 +85,7 @@ public class SalesController {
         model.addAttribute("salesList", salesList);
         return "sales-manage";
     }
+
     private String nowDateFormat() {
         Date now = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
