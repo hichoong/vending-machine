@@ -3,8 +3,11 @@ package com.ezace.vendingmachine.service;
 import com.ezace.vendingmachine.domain.vo.EmailMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.event.EventListener;
+import org.springframework.core.annotation.Order;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,17 +22,14 @@ public class EmailService {
             +"\n" + "재고가 부족한 상품은 다음과 같습니다" + "\n";
     private static final String fromAddress = "ksky8013@gmail.com";
 
-    public EmailMessage createMail(String name) {
-        return EmailMessage.builder()
+    @EventListener
+    public void SendMail (String name) {
+        log.info("메일 보내기");
+        EmailMessage emailMessage = EmailMessage.builder()
                 .to(fromAddress)
                 .subject(title)
                 .message(message + name)
                 .build();
-
-    }
-
-    public void SendMail (EmailMessage emailMessage) {
-        log.info("메일 보내기");
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(emailMessage.getTo());
         mailMessage.setSubject(emailMessage.getSubject());
@@ -37,6 +37,5 @@ public class EmailService {
         mailMessage.setFrom(emailMessage.getTo());
         log.info("메일 정보 : {}", mailMessage);
         mailSender.send(mailMessage);
-
     }
 }

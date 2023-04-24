@@ -1,11 +1,16 @@
 package com.ezace.vendingmachine.domain.vo;
 
+import org.springframework.context.event.EventListener;
+import org.springframework.scheduling.annotation.Async;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class Telegram {
+    @EventListener
+    @Async
     public static void sendTelegramMessage(String goods) {
         final String  token = "6015598495:AAE9QKO0i2MDw4piq2o1Q5fvclBvODGPSDY";
         final String chat_id = "6133591735";

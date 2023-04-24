@@ -2,13 +2,13 @@ package com.ezace.vendingmachine.service;
 
 import com.ezace.vendingmachine.domain.dto.request.BuyGoods;
 import com.ezace.vendingmachine.domain.dto.response.GoodsResponse;
-import com.ezace.vendingmachine.domain.vo.EmailMessage;
 import com.ezace.vendingmachine.domain.vo.GoodsVo;
-import com.ezace.vendingmachine.domain.vo.Telegram;
+import com.ezace.vendingmachine.event.PurchaseEvent;
 import com.ezace.vendingmachine.repository.GoodsMapper;
 import com.ezace.vendingmachine.repository.SalesMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
@@ -20,7 +20,7 @@ import java.util.List;
 public class GoodsService {
     private final GoodsMapper goodsMapper;
     private final SalesMapper salesMapper;
-    private final EmailService emailService;
+    private final ApplicationEventPublisher eventPublisher;
 
     public List<GoodsVo> findAllGoods() {
         return goodsMapper.findAllGoods();
@@ -77,9 +77,7 @@ public class GoodsService {
         goodsResponse.setMoney(calculate);
         goodsResponse.setMsg(goodsResponse.getName() + " 구매가 완료되었습니다.");
         if (goodsVo.getCount() <= 5) {
-            EmailMessage mail = emailService.createMail(goodsVo.getName());
-            emailService.SendMail(mail);
-            Telegram.sendTelegramMessage(goodsVo.getName());
+           eventPublisher.publishEvent(new PurchaseEvent(goodsVo.getName()));
         }
         return goodsResponse;
     }

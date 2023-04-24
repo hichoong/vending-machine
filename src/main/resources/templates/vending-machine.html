@@ -130,8 +130,9 @@
                 dataType : "json",
                 success:function(data) {
                     alert(data.msg);
-                     resultElement.innerText = data.money;
+                    resultElement.innerText = data.money;
                     $('#'+count).html("수량 : " + data.count);
+
                     location.reload;
                 },
                 error : function(e) {
